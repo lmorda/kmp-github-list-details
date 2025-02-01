@@ -8,10 +8,6 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.lmorda.kmp.data.di.dataModule
-import com.lmorda.kmp.data.di.repositoryModule
-import com.lmorda.kmp.ui.di.uiModule
-import org.koin.core.context.startKoin
 
 @Composable
 fun KmpApp() {
@@ -22,15 +18,5 @@ fun KmpApp() {
             val navController: NavHostController = rememberNavController()
             KmpNavHost(navController)
         }
-    }
-}
-
-fun initKoin() {
-    startKoin {
-        modules(
-            dataModule,
-            repositoryModule,
-            uiModule,
-        )
     }
 }

@@ -2,7 +2,6 @@ package com.lmorda.kmp.data.di
 
 import com.lmorda.kmp.data.ApiService
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
@@ -15,7 +14,7 @@ import org.koin.dsl.module
 val dataModule = module {
 
     single {
-        HttpClient(engineFactory = CIO) {
+        HttpClient {
             install(ContentNegotiation) {
                 json(Json { ignoreUnknownKeys = true })
             }
