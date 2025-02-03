@@ -28,12 +28,9 @@ import com.lmorda.kmp.ui.theme.mediumSize
 import com.lmorda.kmp.ui.theme.standardSize
 import com.lmorda.kmp.ui.theme.xLargeSize
 import com.lmorda.kmp.domain.model.GithubRepo
-import com.lmorda.kmp.domain.model.mockDomainData
 import com.lmorda.kmp.ui.shared.EmptyScreenContent
 import com.lmorda.kmp.ui.shared.RepositoryStats
-import com.lmorda.kmp.ui.theme.KmpTheme
 import com.lmorda.kmp.ui.theme.topAppBarColors
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -128,17 +125,4 @@ fun ColumnScope.DetailsContent(details: GithubRepo) {
         color = MaterialTheme.colorScheme.onBackground,
     )
     RepositoryStats(details = details)
-}
-
-@Composable
-@Preview
-private fun DetailsScreenPreview() {
-    KmpTheme {
-        DetailsScreen(
-            state = DetailsContract.State(
-                githubRepo = mockDomainData[0],
-            ),
-            onBack = {},
-        )
-    }
 }

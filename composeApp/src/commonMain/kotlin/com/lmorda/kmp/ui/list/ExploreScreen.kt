@@ -226,18 +226,3 @@ private fun ExploreItemTitle(details: GithubRepo) {
         )
     }
 }
-
-@Composable
-@Preview
-private fun ExploreScreenPreview() {
-    KmpTheme {
-        ExploreScreen(
-            state = ExploreContract.State(
-                githubRepos = mockDomainData,
-            ),
-            onNextPage = {},
-            onRefresh = {},
-            onNavigateToDetails = {},
-        )
-    }
-}
