@@ -114,14 +114,14 @@ fun ColumnScope.DetailsContent(details: GithubRepo) {
     )
     Text(
         text = details.name,
-        style = MaterialTheme.typography.titleLarge,
+        style = MaterialTheme.typography.titleMedium,
         color = MaterialTheme.colorScheme.onBackground,
         maxLines = 1,
     )
     Text(
         modifier = Modifier.padding(top = standardSize),
         text = details.description.orEmpty(),
-        style = MaterialTheme.typography.titleLarge,
+        style = MaterialTheme.typography.bodyLarge,
         color = MaterialTheme.colorScheme.onBackground,
     )
     RepositoryStats(details = details)

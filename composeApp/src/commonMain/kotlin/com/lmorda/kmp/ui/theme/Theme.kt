@@ -56,4 +56,4 @@ val mediumSize: Dp = 8.dp
 val standardSize: Dp = 16.dp
 val mediumLargeSize: Dp = 24.dp
 val largeSize: Dp = 32.dp
-val xLargeSize: Dp = 128.dp
+val xLargeSize: Dp = 96.dp

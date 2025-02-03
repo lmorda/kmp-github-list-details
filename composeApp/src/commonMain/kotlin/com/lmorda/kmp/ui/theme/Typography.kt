@@ -28,11 +28,4 @@ val Typography = Typography(
         lineHeight = 32.sp,
         letterSpacing = 0.5.sp,
     ),
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 32.sp,
-        lineHeight = 48.sp,
-        letterSpacing = 0.5.sp,
-    ),
 )
