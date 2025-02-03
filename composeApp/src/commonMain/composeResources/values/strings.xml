@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
-    <string name="no_data_available">No data available</string>
+    <string name="explore_title">Repositories</string>
+    <string name="list_error">Having a bit of trouble finding those repositories!</string>
+    <string name="details_error">Having a bit of trouble finding this repository!</string>
 </resources>
