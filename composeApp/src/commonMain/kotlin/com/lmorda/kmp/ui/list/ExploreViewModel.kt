@@ -12,10 +12,11 @@ class ExploreViewModel(
     private val dataRepository: DataRepository,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(ExploreContract.State(isFirstLoad = true))
+    private val _state = MutableStateFlow(ExploreContract.State())
     val state: StateFlow<ExploreContract.State> = _state
 
     init {
+        _state.update { it.copy(isFirstLoad = true) }
         getNextPage()
     }
 

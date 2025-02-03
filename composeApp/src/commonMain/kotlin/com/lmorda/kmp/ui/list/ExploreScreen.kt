@@ -40,12 +40,13 @@ import com.lmorda.kmp.ui.theme.mediumSize
 import com.lmorda.kmp.ui.theme.smallSize
 import com.lmorda.kmp.ui.theme.standardSize
 import com.lmorda.kmp.domain.model.GithubRepo
-import com.lmorda.kmp.domain.model.mockDomainData
 import com.lmorda.kmp.ui.shared.EmptyScreenContent
 import com.lmorda.kmp.ui.shared.RepositoryStats
-import com.lmorda.kmp.ui.theme.KmpTheme
 import com.lmorda.kmp.ui.theme.topAppBarColors
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import com.lmorda.kmp.ui.theme.xLargeSize
+import kmp_github_list_details.composeapp.generated.resources.Res
+import kmp_github_list_details.composeapp.generated.resources.explore_title
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -64,7 +65,7 @@ fun ExploreScreenRoute(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ExploreScreen(
+fun ExploreScreen(
     state: ExploreContract.State,
     onNextPage: () -> Unit,
     onRefresh: () -> Unit,
@@ -73,34 +74,43 @@ internal fun ExploreScreen(
     val listState = rememberLazyListState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                colors = topAppBarColors(),
-                title = {
-                    Text(
-                        text = "Repositories", // TODO: Use string resource
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onBackground,
-                    )
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        },
-    ) { paddingValues ->
-        PullToRefreshBox(
-            isRefreshing = state.isRefreshing,
-            onRefresh = onRefresh,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-        ) {
-            ExploreContent(
-                state = state,
-                listState = listState,
-                onNextPage = onNextPage,
-                onNavigateToDetails = onNavigateToDetails,
+    Box(modifier = Modifier.fillMaxSize()) {
+        Scaffold(
+            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            topBar = {
+                TopAppBar(
+                    colors = topAppBarColors(),
+                    title = {
+                        Text(
+                            text = stringResource(Res.string.explore_title),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onBackground,
+                        )
+                    },
+                    scrollBehavior = scrollBehavior,
+                )
+            },
+        ) { paddingValues ->
+            PullToRefreshBox(
+                isRefreshing = state.isRefreshing,
+                onRefresh = onRefresh,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
+                ExploreContent(
+                    state = state,
+                    listState = listState,
+                    onNextPage = onNextPage,
+                    onNavigateToDetails = onNavigateToDetails,
+                )
+            }
+        }
+        if (state.isFirstLoad) {
+            CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.Center).width(width = xLargeSize),
+                color = MaterialTheme.colorScheme.primary,
+                trackColor = MaterialTheme.colorScheme.surfaceVariant,
             )
         }
     }
@@ -115,7 +125,6 @@ private fun ExploreContent(
 ) {
     when {
         state.exception != null -> EmptyScreenContent()
-        // state.isFirstLoad -> ExploreProgressIndicator()  //TODO: progress indicator
         else -> ExploreList(
             listState = listState,
             state = state,
